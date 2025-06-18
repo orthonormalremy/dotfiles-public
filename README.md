@@ -115,7 +115,7 @@ exit # exit and open a new shell to refresh your environment
 
 </details>
 
-#### 3. Init Secrets (for )
+#### 3. Init Secrets (if you're Remy)
 
 ```
 
