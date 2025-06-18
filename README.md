@@ -72,7 +72,7 @@ mkdir -p ~/.config/nix
 Clone this dotfiles repo (I use my home directory `~` as the parent dir):
 
 ```bash
-nix shell nixpkgs#git --command bash -c "git -C /path/to/parent-dir clone https://github.com/orthonormalremy/dotfiles.git"
+nix shell nixpkgs#git --command bash -c "git -C /path/to/parent-dir clone https://orthonormalremy:$(curl -s -u orthonormalremy https://codeberg.org/orthonormalremy/secrets/raw/branch/main/GITHUB_READ_ACCESS_TOKEN)@github.com/orthonormalremy/dotfiles.git"
 ```
 
 Use [Home Manager](https://github.com/nix-community/home-manager) to initialize `home.init.nix` (provides `home.stateVersion`):
@@ -105,7 +105,7 @@ exit # exit and open a new shell to refresh your environment
 ```bash
 (
     set -euo pipefail
-    nix shell nixpkgs#git --command bash -c "git -C ~ clone https://github.com/orthonormalremy/dotfiles.git"
+    nix shell nixpkgs#git --command bash -c "git -C ~ clone https://orthonormalremy:$(curl -s -u orthonormalremy https://codeberg.org/orthonormalremy/secrets/raw/branch/main/GITHUB_READ_ACCESS_TOKEN)@github.com/orthonormalremy/dotfiles.git"
     [[ ! -e ~/.config/home-manager/home.init.nix ]] && nix shell nixpkgs#git --command bash -c "nix run home-manager/master -- init --no-flake" && mv ~/.config/home-manager/home.nix ~/.config/home-manager/home.init.nix
     nix shell nixpkgs#git nixpkgs#stow --command bash -c "cd ~/dotfiles && stow -R -t ~ ."
     nix shell nixpkgs#git --command bash -c "nix run home-manager/master -- switch --impure"
