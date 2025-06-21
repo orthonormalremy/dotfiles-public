@@ -118,5 +118,5 @@ exit # exit and open a new shell to refresh your environment
 #### 3. Init Secrets (if you're Remy)
 
 ```
-
+nu dotfiles/scripts/nu/ensure_secrets.nu
 ```
