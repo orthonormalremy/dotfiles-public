@@ -110,7 +110,7 @@ exit # exit and open a new shell to refresh your environment
 
 ```bash
 (
-    set -euo pipefail
+    set -exuo pipefail
     nix shell nixpkgs#git --command bash -c "git -C ~ clone https://orthonormalremy:$(curl -s -u orthonormalremy https://codeberg.org/orthonormalremy/secrets/raw/branch/main/GITHUB_READ_ACCESS_TOKEN)@github.com/orthonormalremy/dotfiles.git"
     [[ ! -e ~/.config/home-manager/home.init.nix ]] && nix shell nixpkgs#git --command bash -c "nix run home-manager/master -- init --no-flake" && mv ~/.config/home-manager/home.nix ~/.config/home-manager/home.init.nix
     nix shell nixpkgs#git nixpkgs#nushell --command nu -c "cd ~/dotfiles/.config/home-manager; ln -s (ls --short-names ./home.*.nix | get name | input list 'Select home.nix') home.nix"
