@@ -91,7 +91,7 @@ bash -c "cd /path/to/parent-dir/dotfiles/.config/home-manager; home.<profile>.ni
 Create [stow](https://www.gnu.org/software/stow/) managed symlinks:
 
 ```bash
-nix shell nixpkgs#git nixpkgs#stow --command bash -c "cd /path/to/parent-dir/dotfiles && stow -R -t ~ ."
+nix shell nixpkgs#git nixpkgs#stow --command bash -c "cd /path/to/parent-dir/dotfiles && stow --no-folding -R -t ~ ."
 ```
 
 Bootstrap system with Home Manager using the [flakes approach](https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-standalone):
@@ -114,7 +114,7 @@ exit # exit and open a new shell to refresh your environment
     nix shell nixpkgs#git --command bash -c "git -C ~ clone https://orthonormalremy:$(curl -s -u orthonormalremy https://codeberg.org/orthonormalremy/secrets/raw/branch/main/GITHUB_READ_ACCESS_TOKEN)@github.com/orthonormalremy/dotfiles.git"
     [[ ! -e ~/.config/home-manager/home.init.nix ]] && nix shell nixpkgs#git --command bash -c "nix run home-manager/master -- init --no-flake" && mv ~/.config/home-manager/home.nix ~/.config/home-manager/home.init.nix
     bash -c "cd ~/dotfiles/.config/home-manager; ln -s common.nix home.nix"
-    nix shell nixpkgs#git nixpkgs#stow --command bash -c "cd ~/dotfiles && stow -R -t ~ ."
+    nix shell nixpkgs#git nixpkgs#stow --command bash -c "cd ~/dotfiles && stow --no-folding -R -t ~ ."
     nix shell nixpkgs#git --command bash -c "nix run home-manager/master -- switch --impure"
 )
 # exit
