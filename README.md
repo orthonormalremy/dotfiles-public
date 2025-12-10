@@ -115,7 +115,7 @@ exit # exit and open a new shell to refresh your environment
     [[ ! -e ~/.config/home-manager/home.init.nix ]] && nix shell nixpkgs#git --command bash -c "nix run home-manager/master -- init --no-flake" && mv ~/.config/home-manager/home.nix ~/.config/home-manager/home.init.nix
     bash -c "cd ~/dotfiles/.config/home-manager; ln -s common.nix home.nix"
     nix shell nixpkgs#git nixpkgs#stow --command bash -c "cd ~/dotfiles && stow --no-folding -R -t ~ ."
-    nix shell nixpkgs#git --command bash -c "nix run home-manager/master -- switch --impure"
+    nix shell nixpkgs#git --command bash -c "nix run home-manager/master -- switch --impure -b backup"
 )
 # exit
 ```
