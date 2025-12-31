@@ -19,7 +19,7 @@ ps -p 1 -o comm=
 Perform a multi-user installation with the [Determinate Nix installer](https://zero-to-nix.com/start/install/):
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --determinate --no-confirm
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
 ```
 
 ```bash
