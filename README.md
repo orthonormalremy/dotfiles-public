@@ -16,10 +16,10 @@ ps -p 1 -o comm=
 
 **For systemd-based systems:**
 
-Perform a multi-user installation with the [Determinate Nix installer](https://zero-to-nix.com/start/install/):
+Perform a multi-user installation with the [Determinate Nix installer](https://github.com/DeterminateSystems/nix-installer):
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
+curl -fsSL https://install.determinate.systems/nix | sh -s -- install --no-confirm
 ```
 
 ```bash
@@ -111,7 +111,7 @@ exit # exit and open a new shell to refresh your environment
 ```bash
 (
     set -exuo pipefail
-    nix shell nixpkgs#git --command bash -c "git -C ~ clone https://orthonormalremy:$(curl -s -u orthonormalremy https://codeberg.org/orthonormalremy/secrets/raw/branch/main/GITHUB_READ_ACCESS_TOKEN)@github.com/orthonormalremy/dotfiles.git"
+    nix shell nixpkgs#git --command bash -c "GIT_SSH_COMMAND=\"ssh -o StrictHostKeyChecking=accept-new\" git -C ~ clone git@github.com:orthonormalremy/dotfiles.git || git -C ~ clone https://orthonormalremy:$(curl -s -u orthonormalremy https://codeberg.org/orthonormalremy/secrets/raw/branch/main/GITHUB_READ_ACCESS_TOKEN)@github.com/orthonormalremy/dotfiles.git"
     [[ ! -e ~/.config/home-manager/home.init.nix ]] && nix shell nixpkgs#git --command bash -c "nix run home-manager/master -- init --no-flake" && mv ~/.config/home-manager/home.nix ~/.config/home-manager/home.init.nix
     bash -c "cd ~/dotfiles/.config/home-manager; ln -s common.nix home.nix"
     nix shell nixpkgs#git nixpkgs#stow --command bash -c "cd ~/dotfiles && stow --no-folding -R -t ~ ."
