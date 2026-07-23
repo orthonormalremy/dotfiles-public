@@ -112,10 +112,7 @@ exit # exit and open a new shell to refresh your environment
 (
     set -exuo pipefail
     nix shell nixpkgs#git --command bash -c "GIT_SSH_COMMAND=\"ssh -o StrictHostKeyChecking=accept-new\" git -C ~ clone git@github.com:orthonormalremy/dotfiles.git || git -C ~ clone https://orthonormalremy:$(curl -s -u orthonormalremy https://codeberg.org/orthonormalremy/secrets/raw/branch/main/GITHUB_READ_ACCESS_TOKEN)@github.com/orthonormalremy/dotfiles.git"
-    [[ ! -e ~/.config/home-manager/home.init.nix ]] && nix shell nixpkgs#git --command bash -c "nix run home-manager/master -- init --no-flake" && mv ~/.config/home-manager/home.nix ~/.config/home-manager/home.init.nix
-    bash -c "cd ~/dotfiles/.config/home-manager; ln -s common.nix home.nix"
-    nix shell nixpkgs#git nixpkgs#stow --command bash -c "cd ~/dotfiles && stow --no-folding -R -t ~ ."
-    nix shell nixpkgs#git --command bash -c "nix run home-manager/master -- switch --impure -b distro"
+    ~/dotfiles/scripts/bootstrap/setup_home.sh
 )
 # exit
 ```
